@@ -1,0 +1,47 @@
+<html>
+
+<head>
+  <title>Front angular</title>
+</head>
+
+<body>
+  <div id="head" class="head">
+    <label>Temp. Atual: </label>
+  </div>
+
+  <div class="container" fxLayout="row" fxLayout.xs="column">
+    <div class="left-menu" layout="column">
+      <div flex>Segunda: </div>
+      <div flex>Terça: </div>
+      <div flex>Quarta: </div>
+      <div flex>Quinta: </div>
+      <div flex>Sexta: </div>
+      <div flex>Sabado: </div>
+      <div flex>Domingo: </div>
+    </div>
+    <div  flex="70">
+      <!-- <mat-card>Simple card</mat-card>
+      <mat-card>Simple card</mat-card>
+      <mat-card>Simple card</mat-card>
+      <mat-card>Simple card</mat-card> -->
+
+      <!-- <div id="chartContainer" style="height: 370px; width: 100%;"></div> -->
+      <canvas id="myChart" width="100" height="100"></canvas>
+      <canvas id="myChart2" width="100" height="100"></canvas>
+        <!-- <div *ngIf="chart">
+          <canvas id="canvas">{{ chart }}</canvas>
+        </div> -->
+      <!-- <ul>
+          <li>Segunda:  </li>
+          <li>Terça:  </li>
+          <li>Quarta:  </li>
+          <li>Quinta:  </li>
+          <li>Sexta:  </li>
+          <li>Sabado:  </li>
+          <li>Domingo:  </li>
+        </ul> -->
+    </div>
+  </div>
+</body>
+
+</html>
