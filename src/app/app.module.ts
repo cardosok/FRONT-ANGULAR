@@ -9,9 +9,15 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
+import { HttpClientModule } from '@angular/common/http';
+import { HortaServiceService } from './service/horta-service.service';
+import { RouterModule, Routes } from '@angular/router'
+import { CommonModule } from '@angular/common';
 
-// import { Chart } from 'canvasjs';
-// import { Chart } from 'chart.js';
+
+const appRoutes: Routes = [
+  { path: '', component: IndexComponent },
+];
 
 
 @NgModule({
@@ -24,11 +30,14 @@ import { ChartsModule } from 'ng2-charts';
     BrowserAnimationsModule,
     MatSliderModule,
     FlexLayoutModule,
+    RouterModule.forRoot(appRoutes),
     MatCardModule,
-    ChartsModule
+    ChartsModule,
+    HttpClientModule,
+    CommonModule
     // Chart
   ],
-  providers: [],
+  providers: [HortaServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
