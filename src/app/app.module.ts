@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
+import { ChartsModule } from 'ng2-charts';
+
 // import { Chart } from 'canvasjs';
 // import { Chart } from 'chart.js';
 
@@ -20,15 +22,13 @@ import { MatCardModule } from '@angular/material/card';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-
     MatSliderModule,
     FlexLayoutModule,
     MatCardModule,
+    ChartsModule
     // Chart
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
