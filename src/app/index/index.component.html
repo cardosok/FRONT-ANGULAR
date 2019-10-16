@@ -1,10 +1,5 @@
-<html>
 
-<head>
-  <title>Front angular</title>
-</head>
-
-<body>
+<div>
   <div id="head" class="head">
     <label>Temp. Atual: </label>
   </div>
@@ -20,38 +15,18 @@
       <div flex>Domingo: </div>
     </div>
     <div  flex="70">
-      <!-- <mat-card>Simple card</mat-card>
-      <mat-card>Simple card</mat-card>
-      <mat-card>Simple card</mat-card>
-      <mat-card>Simple card</mat-card> -->
-
-      <!-- <div id="chartContainer" style="height: 370px; width: 100%;"></div> -->
       <div style="width: 150%;">
       <canvas
           baseChart
           [chartType]="'line'"
-          [datasets]="newchartData"
-          [labels]="newchartLabels"
+          [datasets]="chartData"
+          [labels]="chartLabels"
           [options]="chartOptions"
           [legend]="true">
       </canvas>
     </div>
       <canvas id="myChart" width="100" height="100"></canvas>
       <canvas id="myChart2" width="100" height="100"></canvas>
-        <!-- <div *ngIf="chart">
-          <canvas id="canvas">{{ chart }}</canvas>
-        </div> -->
-      <!-- <ul>
-          <li>Segunda:  </li>
-          <li>Terça:  </li>
-          <li>Quarta:  </li>
-          <li>Quinta:  </li>
-          <li>Sexta:  </li>
-          <li>Sabado:  </li>
-          <li>Domingo:  </li>
-        </ul> -->
     </div>
   </div>
-</body>
-
-</html>
+</div>

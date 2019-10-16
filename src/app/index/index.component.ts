@@ -9,15 +9,10 @@ import { Horta } from '../model/horta';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-
 export class IndexComponent implements OnInit {
   chartOptions = {
     responsive: true
   };
-
-  horta = [];
-
-
   arrayHorta:Array<Horta>
   
   arrayTemperaturaDoAr = [];
@@ -47,7 +42,6 @@ export class IndexComponent implements OnInit {
         if (r == null) {
           alert('Dados inválidos.');
         } else {
-          this.horta = r;
           this.arrayHorta = r;
           //console.log(this.arrayHorta);
           this.populaArrays(this.arrayHorta);
@@ -59,11 +53,12 @@ export class IndexComponent implements OnInit {
     });
       var ctx = document.getElementById('myChart');
       let temp_max = [80, 90, 100, 60];
-    let temp_min = [15, 20, 30, 50];
+      let temp_min = [15, 20, 30, 50];
   }
 
 
   populaArrays (array:Array<Horta>){
+   
     array.forEach((horta)=>{
       this.arrayTemperaturaDoAr.push(horta.temperaturaDoAr);
       this.arrayUmidade.push(horta.umidade);
