@@ -1,0 +1,13 @@
+<div class="container" fxLayout="row">
+    <div style="width: 100%">
+        <div>
+            <canvas baseChart 
+                    [chartType]="'line'" 
+                    [datasets]="temperaturaDoAr" 
+                    [labels]="datas"
+                    [options]="chartOptions" 
+                    [legend]="true">
+            </canvas>
+        </div>
+    </div>
+</div>

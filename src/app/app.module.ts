@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { IndexComponent } from './index/index.component';
+import { IndexComponent } from './components/index/index.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
@@ -13,17 +13,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { HortaServiceService } from './service/horta-service.service';
 import { RouterModule, Routes } from '@angular/router'
 import { CommonModule } from '@angular/common';
+import { TemperaturaDoArComponent } from './components/temperatura-do-ar/temperatura-do-ar.component';
+import { UmidadeDoArComponent } from './components/umidade-do-ar/umidade-do-ar.component';
+import { UmidadeDoSoloComponent } from './components/umidade-do-solo/umidade-do-solo.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
+  { path: 'temperaturaDoAr', component: TemperaturaDoArComponent },
+  { path: 'umidadeDoSolo', component: UmidadeDoSoloComponent },
+  { path: 'umidadeDoAr', component: UmidadeDoArComponent }
 ];
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent
+    IndexComponent,
+    TemperaturaDoArComponent,
+    UmidadeDoArComponent,
+    UmidadeDoSoloComponent
   ],
   imports: [
     BrowserModule,
