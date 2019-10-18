@@ -10,7 +10,12 @@ import { HortaServiceService } from 'src/app/service/horta-service.service';
 
 export class UmidadeDoSoloComponent implements OnInit {
   chartOptions = {
-    responsive: true
+    responsive: true,
+    title: {
+            display: true,
+            fontSize: 16,
+            text: 'Umidade do Solo'
+        }
   };
   arrayHorta: Array<Horta>
 
@@ -49,4 +54,3 @@ export class UmidadeDoSoloComponent implements OnInit {
   }
 
 }
-

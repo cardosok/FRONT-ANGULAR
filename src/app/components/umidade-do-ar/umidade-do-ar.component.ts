@@ -9,15 +9,20 @@ import { HortaServiceService } from 'src/app/service/horta-service.service';
 })
 export class UmidadeDoArComponent implements OnInit {
   chartOptions = {
-    responsive: true
+    responsive: true,
+    title: {
+            display: true,
+            fontSize: 16,
+            text: 'Umidade do Ambiente'
+        }
   };
   arrayHorta: Array<Horta>
 
-  arrayUmidadeDoAr = [];  
+  arrayUmidadeDoAr = [];
   arrayData = [];
 
   umidadeDoAr = [
-    { data: this.arrayUmidadeDoAr, label: 'Umidade do Ar' },
+    { data: this.arrayUmidadeDoAr, label: 'Umidade do Ambiente' },
   ];
   datas = this.arrayData;
 
@@ -43,7 +48,7 @@ export class UmidadeDoArComponent implements OnInit {
     array.forEach((horta) => {
       this.arrayUmidadeDoAr.push(horta.umidade);
       console.log(horta.date.getFullYear);
-      
+
       this.arrayData.push(horta.date);
     });
 

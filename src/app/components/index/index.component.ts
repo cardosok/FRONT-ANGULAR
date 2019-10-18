@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
 import { HortaServiceService } from '../../service/horta-service.service';
 import { Horta } from '../../model/horta';
@@ -10,10 +11,17 @@ import { Horta } from '../../model/horta';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+  busca = {
+    Data_Inicial: '',
+    Data_Final: ''
+  }
 
   constructor(private hortaService: HortaServiceService) { }
 
-  ngOnInit() {  }
+  ngOnInit() {
+  }
+
+  atualizar() {
+
+  }
 }
-
-

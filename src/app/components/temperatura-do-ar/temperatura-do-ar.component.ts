@@ -9,7 +9,12 @@ import { HortaServiceService } from 'src/app/service/horta-service.service';
 })
 export class TemperaturaDoArComponent implements OnInit {
   chartOptions = {
-    responsive: true
+    responsive: true,
+    title: {
+            display: true,
+            fontSize: 16,
+            text: 'Temperatura do Ambiente'
+        }
   };
   arrayHorta: Array<Horta>
 
@@ -17,7 +22,7 @@ export class TemperaturaDoArComponent implements OnInit {
   arrayData = [];
 
   temperaturaDoAr = [
-    { data: this.arrayTemperaturaDoAr, label: 'Temperatura Do Ar' },
+    { data: this.arrayTemperaturaDoAr, label: 'Temperatura do Ambiente' },
   ];
   datas = this.arrayData;
 

@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HortaServiceService } from './service/horta-service.service';
 import { RouterModule, Routes } from '@angular/router'
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TemperaturaDoArComponent } from './components/temperatura-do-ar/temperatura-do-ar.component';
 import { UmidadeDoArComponent } from './components/umidade-do-ar/umidade-do-ar.component';
 import { UmidadeDoSoloComponent } from './components/umidade-do-solo/umidade-do-solo.component';
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     MatCardModule,
     ChartsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    FormsModule
     // Chart
   ],
   providers: [HortaServiceService],
