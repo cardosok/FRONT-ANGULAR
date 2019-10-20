@@ -21,4 +21,11 @@ export class HortaServiceService {
     return this.http.get( this.baseUrl, {headers: this.headers});
   }
 
+  getFindByData(dataInicial,dataFinal): Observable<any> {
+    this.headers = new HttpHeaders();
+    this.headers = this.headers.set('Content-Type', 'application/json; charset=utf-8');
+    let Json = {'Data_Inicial': dataInicial, 'Data_Final': dataFinal}
+    return this.http.post(this.baseUrl + 'data', JSON.stringify(Json), {headers: this.headers});
+  }
+
 }

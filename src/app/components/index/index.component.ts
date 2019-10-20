@@ -11,6 +11,8 @@ import { Horta } from '../../model/horta';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+   
+  arrayHorta: Array<Horta>;
   busca = {
     Data_Inicial: '',
     Data_Final: ''
@@ -22,6 +24,19 @@ export class IndexComponent implements OnInit {
   }
 
   atualizar() {
-
+    console.log(this.busca.Data_Final);
+    console.log(this.busca.Data_Inicial);
+    this.hortaService.getFindByData(this.busca.Data_Inicial, this.busca.Data_Final).subscribe(r =>{
+      if (r == null) {
+        alert('Dados inválidos.');
+      } else {
+        this.arrayHorta = r;
+      }
+    },
+      err => {
+        console.log('Error: ' + err);
+        alert('Dados inválidos.');
+      
+    });
   }
 }

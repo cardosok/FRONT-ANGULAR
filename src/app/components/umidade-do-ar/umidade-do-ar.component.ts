@@ -16,7 +16,7 @@ export class UmidadeDoArComponent implements OnInit {
             text: 'Umidade do Ambiente'
         }
   };
-  arrayHorta: Array<Horta>
+  arrayHorta: Array<Horta>;
 
   arrayUmidadeDoAr = [];
   arrayData = [];
@@ -47,8 +47,7 @@ export class UmidadeDoArComponent implements OnInit {
   populaArrays(array: Array<Horta>) {
     array.forEach((horta) => {
       this.arrayUmidadeDoAr.push(horta.umidade);
-      console.log(horta.date.getFullYear);
-
+      //console.log(horta.date);
       this.arrayData.push(horta.date);
     });
 
