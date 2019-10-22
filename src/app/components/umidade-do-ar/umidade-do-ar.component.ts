@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Horta } from 'src/app/model/horta';
 import { HortaServiceService } from 'src/app/service/horta-service.service';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-umidade-do-ar',
@@ -13,11 +14,11 @@ export class UmidadeDoArComponent implements OnInit {
     title: {
             display: true,
             fontSize: 16,
-            text: 'Umidade do Ambiente'
+            text: 'Umidade do Ambiente (%)'
         }
   };
   arrayHorta: Array<Horta>;
-
+  
   arrayUmidadeDoAr = [];
   arrayData = [];
 
@@ -26,31 +27,36 @@ export class UmidadeDoArComponent implements OnInit {
   ];
   datas = this.arrayData;
 
-  constructor(private hortaService: HortaServiceService) { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.hortaService.getAll().subscribe(r => {
-      if (r == null) {
-        alert('Dados inválidos.');
-      } else {
-        this.arrayHorta = r;
-        this.populaArrays(this.arrayHorta);
-      }
-    },
-      err => {
-        console.log('Error: ' + err);
-        alert('Dados inválidos.');
-      });
+    this.data.arrayHorta.subscribe(val => {
+      this.arrayHorta = val;
+      this.populaArrays(this.arrayHorta);
+    });
   }
 
+async populaArrays(array: Array<Horta>) {
+    let value = this.arrayUmidadeDoAr.length;
+    let value2 = this.arrayData.length;
+    
+    for (let index = 0; index < value; index++) {
+      this.arrayUmidadeDoAr.pop();
+    }
 
-  populaArrays(array: Array<Horta>) {
-    array.forEach((horta) => {
+    for (let index = 0; index < value2; index++) {
+      this.arrayData.pop();
+    }
+    await array.forEach((horta) => {
       this.arrayUmidadeDoAr.push(horta.umidade);
-      //console.log(horta.date);
-      this.arrayData.push(horta.date);
+      let data = this.formataDate(horta.date)
+      this.arrayData.push(data);
     });
+  }
 
+  formataDate(date: Date){
+    let data = (new Date(date)).toLocaleString('pt-BR')
+    return data;
   }
 
 }

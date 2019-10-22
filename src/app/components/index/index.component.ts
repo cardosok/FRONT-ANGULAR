@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { formatDate } from '@angular/common';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { HortaServiceService } from '../../service/horta-service.service';
 import { Horta } from '../../model/horta';
+import { DataService } from 'src/app/service/data.service';
 
 
 @Component({
@@ -11,16 +11,35 @@ import { Horta } from '../../model/horta';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-   
   arrayHorta: Array<Horta>;
   busca = {
     Data_Inicial: '',
     Data_Final: ''
   }
 
-  constructor(private hortaService: HortaServiceService) { }
+  message:Array<Horta> = [{
+    umidade: 200,
+    temperaturaDoAr:200,
+    date: new Date(),
+    umidadeDoSolo:""
+  }];
+
+  constructor(private hortaService: HortaServiceService, private data: DataService) { }
 
   ngOnInit() {
+    this.hortaService.getAll().subscribe(r =>{
+      if (r == null) {
+        alert('Dados inválidos.');
+      } else {
+        this.arrayHorta = r;
+        this.data.changeMessage(this.arrayHorta);
+      }
+    },
+      err => {
+        console.log('Error: ' + err);
+        alert('Dados inválidos.');
+      
+    });
   }
 
   atualizar() {
@@ -31,6 +50,7 @@ export class IndexComponent implements OnInit {
         alert('Dados inválidos.');
       } else {
         this.arrayHorta = r;
+        this.data.changeMessage(this.arrayHorta);
       }
     },
       err => {
@@ -38,5 +58,10 @@ export class IndexComponent implements OnInit {
         alert('Dados inválidos.');
       
     });
+  }
+  limpar(){
+    this.busca.Data_Inicial = '';
+    this.busca.Data_Final = '';
+    this.atualizar();
   }
 }

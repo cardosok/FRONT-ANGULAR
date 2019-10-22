@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Horta } from 'src/app/model/horta';
 import { HortaServiceService } from 'src/app/service/horta-service.service';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-temperatura-do-ar',
@@ -13,10 +14,10 @@ export class TemperaturaDoArComponent implements OnInit {
     title: {
             display: true,
             fontSize: 16,
-            text: 'Temperatura do Ambiente'
+            text: 'Temperatura do Ambiente (ºC)'
         }
   };
-  arrayHorta: Array<Horta>
+  arrayHorta: Array<Horta>;
 
   arrayTemperaturaDoAr = [];
   arrayData = [];
@@ -26,30 +27,34 @@ export class TemperaturaDoArComponent implements OnInit {
   ];
   datas = this.arrayData;
 
-  constructor(private hortaService: HortaServiceService) { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.hortaService.getAll().subscribe(r => {
-      if (r == null) {
-        alert('Dados inválidos.');
-      } else {
-        this.arrayHorta = r;
-        this.populaArrays(this.arrayHorta);
-      }
-    },
-      err => {
-        console.log('Error: ' + err);
-        alert('Dados inválidos.');
-      });
-  }
-
-
-  populaArrays(array: Array<Horta>) {
-    array.forEach((horta) => {
-      this.arrayTemperaturaDoAr.push(horta.temperaturaDoAr);
-      this.arrayData.push(horta.date);
+    this.data.arrayHorta.subscribe(val => {
+      this.arrayHorta = val;
+      this.populaArrays(this.arrayHorta);
     });
-
   }
 
+  async populaArrays(array: Array<Horta>) {
+    let value = this.arrayTemperaturaDoAr.length;
+    let value2 = this.arrayData.length;
+    
+    for (let index = 0; index < value; index++) {
+      this.arrayTemperaturaDoAr.pop();
+    }
+
+    for (let index = 0; index < value2; index++) {
+      this.arrayData.pop();
+    }
+    await array.forEach((horta) => {
+      this.arrayTemperaturaDoAr.push(horta.temperaturaDoAr);
+      let data = this.formataDate(horta.date);
+      this.arrayData.push(data);     
+    });
+  }
+  formataDate(date: Date){
+    let data = (new Date(date)).toLocaleString('pt-BR')
+    return data;
+  }
 }

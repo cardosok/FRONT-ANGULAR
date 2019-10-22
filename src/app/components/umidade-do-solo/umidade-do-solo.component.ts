@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Horta } from 'src/app/model/horta';
 import { HortaServiceService } from 'src/app/service/horta-service.service';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-umidade-do-solo',
@@ -12,10 +13,10 @@ export class UmidadeDoSoloComponent implements OnInit {
   chartOptions = {
     responsive: true,
     title: {
-            display: true,
-            fontSize: 16,
-            text: 'Umidade do Solo'
-        }
+      display: true,
+      fontSize: 16,
+      text: 'Umidade do Solo (%)'
+    }
   };
   arrayHorta: Array<Horta>
 
@@ -27,30 +28,36 @@ export class UmidadeDoSoloComponent implements OnInit {
   ];
   datas = this.arrayData;
 
-  constructor(private hortaService: HortaServiceService) { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.hortaService.getAll().subscribe(r => {
-      if (r == null) {
-        alert('Dados inválidos.');
-      } else {
-        this.arrayHorta = r;
-        this.populaArrays(this.arrayHorta);
-      }
-    },
-      err => {
-        console.log('Error: ' + err);
-        alert('Dados inválidos.');
-      });
+    this.data.arrayHorta.subscribe(val => {
+      this.arrayHorta = val
+      this.populaArrays(this.arrayHorta);
+    });
   }
 
+   async populaArrays(array: Array<Horta>) {
+    let value = this.arrayUmidadeDoSolo.length;
+    let value2 = this.arrayData.length;
+    
+    for (let index = 0; index < value; index++) {
+      this.arrayUmidadeDoSolo.pop();
+    }
 
-  populaArrays(array: Array<Horta>) {
-    array.forEach((horta) => {
+    for (let index = 0; index < value2; index++) {
+      this.arrayData.pop();
+    }
+    await array.forEach((horta) => {
       this.arrayUmidadeDoSolo.push(horta.umidadeDoSolo);
-      this.arrayData.push(horta.date);
+      let data = this.formataDate(horta.date);
+      this.arrayData.push(data);
     });
+  }
 
+  formataDate(date: Date){
+    let data = (new Date(date)).toLocaleString('pt-BR')
+    return data;
   }
 
 }
