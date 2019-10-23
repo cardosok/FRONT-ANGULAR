@@ -25,7 +25,7 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.hortaService.getAll().subscribe(r =>{
       if (r == null) {
-      //  alert('Dados inválidos.');
+        alert('Dados inválidos.');
       } else {
         this.arrayHorta = r;
         this.data.changeMessage(this.arrayHorta);
@@ -33,7 +33,7 @@ export class IndexComponent implements OnInit {
     },
       err => {
         console.log('Error: ' + err);
-       // alert('Dados inválidos.');
+        alert('Dados inválidos.');
       
     });
   }
@@ -50,13 +50,13 @@ export class IndexComponent implements OnInit {
     },
       err => {
         console.log('Error: ' + err);
-        //alert('Dados inválidos.');
+        alert('Dados inválidos.');
       
     });
   }
   limpar(){
-    this.busca.Data_Inicial = '';
-    this.busca.Data_Final = '';
+    this.busca.Data_Inicial = this.datePipe.transform(new Date(),"yyyy-MM-dd");
+    this.busca.Data_Final = this.datePipe.transform(new Date(),"yyyy-MM-dd");
     this.atualizar();
   }
 }
