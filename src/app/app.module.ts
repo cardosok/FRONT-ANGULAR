@@ -12,7 +12,7 @@ import { ChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
 import { HortaServiceService } from './service/horta-service.service';
 import { RouterModule, Routes } from '@angular/router'
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TemperaturaDoArComponent } from './components/temperatura-do-ar/temperatura-do-ar.component';
 import { UmidadeDoArComponent } from './components/umidade-do-ar/umidade-do-ar.component';
@@ -48,7 +48,7 @@ const appRoutes: Routes = [
     FormsModule
     // Chart
   ],
-  providers: [HortaServiceService],
+  providers: [HortaServiceService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

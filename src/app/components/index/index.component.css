@@ -2,35 +2,31 @@
     margin-top: 50px;
 }
 .head {
-    /* width: 100%;
-    height: 10%; */
     background-color: blueviolet;
 }
 
 .left-menu{
-    /* width: 20%;
-    height: 50%;
-    display: block;
-    align-items: flex-end; */
     background-color: chartreuse;
 }
 
 .main-content{
-    /* width: 70%;
-    height: 50%;
-    display: block;
-    align-items: flex-start; */
     background-color: crimson;
 }
 
 .form-group {
     padding-left: 10px;
+    margin-right: 10px;
 }
 
 .btn-primary {
-  margin-top: 0px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 .form-control .form-label {
     text-align: left;
+}
+.form-inline label{
+    align-items: flex-start;
+    justify-content: left;
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ModuleWithComponentFactories } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { HortaServiceService } from '../../service/horta-service.service';
 import { Horta } from '../../model/horta';
 import { DataService } from 'src/app/service/data.service';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -13,23 +14,18 @@ import { DataService } from 'src/app/service/data.service';
 export class IndexComponent implements OnInit {
   arrayHorta: Array<Horta>;
   busca = {
-    Data_Inicial: '',
-    Data_Final: ''
+    Data_Inicial:this.datePipe.transform(new Date(),"yyyy-MM-dd") ,
+    Data_Final: this.datePipe.transform(new Date(),"yyyy-MM-dd"),
+    Hora_Inicial: '00:00',
+    Hora_Final: '00:00'
   }
 
-  message:Array<Horta> = [{
-    umidade: 200,
-    temperaturaDoAr:200,
-    date: new Date(),
-    umidadeDoSolo:""
-  }];
-
-  constructor(private hortaService: HortaServiceService, private data: DataService) { }
+  constructor(private hortaService: HortaServiceService, private data: DataService,private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.hortaService.getAll().subscribe(r =>{
       if (r == null) {
-        alert('Dados inválidos.');
+      //  alert('Dados inválidos.');
       } else {
         this.arrayHorta = r;
         this.data.changeMessage(this.arrayHorta);
@@ -37,14 +33,13 @@ export class IndexComponent implements OnInit {
     },
       err => {
         console.log('Error: ' + err);
-        alert('Dados inválidos.');
+       // alert('Dados inválidos.');
       
     });
   }
 
   atualizar() {
-    console.log(this.busca.Data_Final);
-    console.log(this.busca.Data_Inicial);
+    console.log(this.busca);
     this.hortaService.getFindByData(this.busca.Data_Inicial, this.busca.Data_Final).subscribe(r =>{
       if (r == null) {
         alert('Dados inválidos.');
@@ -55,7 +50,7 @@ export class IndexComponent implements OnInit {
     },
       err => {
         console.log('Error: ' + err);
-        alert('Dados inválidos.');
+        //alert('Dados inválidos.');
       
     });
   }
