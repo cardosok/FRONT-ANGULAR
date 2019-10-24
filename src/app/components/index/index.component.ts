@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ModuleWithComponentFactories } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ModuleWithComponentFactories, destroyPlatform } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { HortaServiceService } from '../../service/horta-service.service';
 import { Horta } from '../../model/horta';
@@ -25,7 +25,7 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.hortaService.getAll().subscribe(r =>{
       if (r == null) {
-        alert('Dados inválidos.');
+       // alert('Dados inválidos.');
       } else {
         this.arrayHorta = r;
         this.data.changeMessage(this.arrayHorta);
@@ -33,13 +33,25 @@ export class IndexComponent implements OnInit {
     },
       err => {
         console.log('Error: ' + err);
-        alert('Dados inválidos.');
+        //alert('Dados inválidos.');
       
     });
   }
 
   atualizar() {
     console.log(this.busca);
+    let tes = (this.busca.Hora_Inicial).split(":");
+    let t = this.busca.Data_Inicial+'T'+this.busca.Hora_Inicial+'TZD';
+   console.log(t);
+   //YYYY-MM-DDThh:mmTZD
+    let tess = new Date(t);
+
+    let l = new Date(tess);
+    console.log(l);
+
+    let dataComHora =  this.datePipe.transform(this.busca.Data_Inicial,"yyyy-MM-dd");
+   // console.log(dataComHora);
+    
     this.hortaService.getFindByData(this.busca.Data_Inicial, this.busca.Data_Final).subscribe(r =>{
       if (r == null) {
         alert('Dados inválidos.');
@@ -50,7 +62,7 @@ export class IndexComponent implements OnInit {
     },
       err => {
         console.log('Error: ' + err);
-        alert('Dados inválidos.');
+        //alert('Dados inválidos.');
       
     });
   }
