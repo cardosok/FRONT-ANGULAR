@@ -23,9 +23,13 @@ export class IndexComponent implements OnInit {
   constructor(private hortaService: HortaServiceService, private data: DataService,private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.getAll();
+  }
+
+  getAll(){
     this.hortaService.getAll().subscribe(r =>{
       if (r == null) {
-       // alert('Dados inválidos.');
+        alert('Lista Vazia.');
       } else {
         this.arrayHorta = r;
         this.data.changeMessage(this.arrayHorta);
@@ -33,26 +37,20 @@ export class IndexComponent implements OnInit {
     },
       err => {
         console.log('Error: ' + err);
-        //alert('Dados inválidos.');
-      
+        alert('Dados inválidos.');
     });
   }
 
   atualizar() {
     console.log(this.busca);
-    let tes = (this.busca.Hora_Inicial).split(":");
-    let t = this.busca.Data_Inicial+'T'+this.busca.Hora_Inicial+'TZD';
-   console.log(t);
-   //YYYY-MM-DDThh:mmTZD
-    let tess = new Date(t);
-
-    let l = new Date(tess);
-    console.log(l);
-
-    let dataComHora =  this.datePipe.transform(this.busca.Data_Inicial,"yyyy-MM-dd");
-   // console.log(dataComHora);
-    
-    this.hortaService.getFindByData(this.busca.Data_Inicial, this.busca.Data_Final).subscribe(r =>{
+    //----------------------------------------------------Data Inicial--------------------------------------------------------------//
+    let format = this.busca.Data_Inicial+'T'+this.busca.Hora_Inicial;
+    let dataEHora = new Date(format);
+    //-------------------------------------------------Data Final-------------------------------------------------------------------//
+    let formatFinal = this.busca.Data_Final+'T'+this.busca.Hora_Final;
+    let dataEHoraFinal = new Date(formatFinal);
+    //-----------------------------------------------------------------------------------------------------------------------------//
+    this.hortaService.getFindByData(dataEHora, dataEHoraFinal).subscribe(r =>{
       if (r == null) {
         alert('Dados inválidos.');
       } else {
@@ -62,13 +60,15 @@ export class IndexComponent implements OnInit {
     },
       err => {
         console.log('Error: ' + err);
-        //alert('Dados inválidos.');
+        alert('Dados inválidos.');
       
     });
   }
+
+
   limpar(){
     this.busca.Data_Inicial = this.datePipe.transform(new Date(),"yyyy-MM-dd");
     this.busca.Data_Final = this.datePipe.transform(new Date(),"yyyy-MM-dd");
-    this.atualizar();
+    this.getAll();
   }
 }
