@@ -48,8 +48,10 @@ export class UmidadeDoSoloComponent implements OnInit {
     for (let index = 0; index < value2; index++) {
       this.arrayData.pop();
     }
+    
     await array.forEach((horta) => {
-      this.arrayUmidadeDoSolo.push(horta.umidadeDoSolo);
+
+      this.arrayUmidadeDoSolo.push(this.map(horta.umidadeDoSolo,800,150,0,100));
       let data = this.formataDate(horta.date);
       this.arrayData.push(data);
     });
@@ -59,5 +61,9 @@ export class UmidadeDoSoloComponent implements OnInit {
     let data = (new Date(date)).toLocaleString('pt-BR')
     return data;
   }
+
+map(x,in_min,in_max,out_min,out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
 }

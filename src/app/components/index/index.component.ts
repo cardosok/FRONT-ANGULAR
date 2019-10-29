@@ -69,6 +69,8 @@ export class IndexComponent implements OnInit {
   limpar(){
     this.busca.Data_Inicial = this.datePipe.transform(new Date(),"yyyy-MM-dd");
     this.busca.Data_Final = this.datePipe.transform(new Date(),"yyyy-MM-dd");
+    this.busca.Hora_Inicial = '00:00';
+    this.busca.Hora_Final = '00:00';
     this.getAll();
   }
 }
